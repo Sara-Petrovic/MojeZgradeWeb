@@ -18,16 +18,28 @@ public class Racun implements Entity{
     private double ukupnaVrednost;
     private Date datumIzdavanja;
     private Status status;
+    private VlasnikPosebnogDela vlasnikPosebnogDela;
 
     public Racun() {
     }
 
-    public Racun(Long racunId, double ukupnaVrednost, Date datumIzdavanja, Status status) {
+    public Racun(Long racunId, double ukupnaVrednost, Date datumIzdavanja, Status status, VlasnikPosebnogDela vlasnikPosebnogDela) {
         this.racunId = racunId;
         this.ukupnaVrednost = ukupnaVrednost;
         this.datumIzdavanja = datumIzdavanja;
         this.status = status;
+        this.vlasnikPosebnogDela = vlasnikPosebnogDela;
     }
+
+    public VlasnikPosebnogDela getVlasnikPosebnogDela() {
+        return vlasnikPosebnogDela;
+    }
+
+    public void setVlasnikPosebnogDela(VlasnikPosebnogDela vlasnikPosebnogDela) {
+        this.vlasnikPosebnogDela = vlasnikPosebnogDela;
+    }
+
+    
 
     public Long getRacunId() {
         return racunId;
