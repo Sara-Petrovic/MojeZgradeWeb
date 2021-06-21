@@ -27,48 +27,6 @@ CREATE TABLE `mesto` (
   PRIMARY KEY (`mestoid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-/*Table structure for table `racun` */
-
-DROP TABLE IF EXISTS `racun`;
-
-CREATE TABLE `racun` (
-  `racunid` bigint NOT NULL,
-  `ukupnavrednost` double DEFAULT NULL,
-  `datumizdavanja` date DEFAULT NULL,
-  `vlasnikid` bigint DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`racunid`),
-  KEY `vlasnikid` (`vlasnikid`),
-  CONSTRAINT `racun_ibfk_1` FOREIGN KEY (`vlasnikid`) REFERENCES `vlasnik_posebnog_dela` (`vlasnikid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-/*Table structure for table `sednica_skupstine` */
-
-DROP TABLE IF EXISTS `sednica_skupstine`;
-
-CREATE TABLE `sednica_skupstine` (
-  `sednicaskupstineid` bigint NOT NULL AUTO_INCREMENT,
-  `datumodrzavanja` date DEFAULT NULL,
-  `brojprisutnih` int DEFAULT NULL,
-  `dnevnired` varchar(200) DEFAULT NULL,
-  `stambenazajednicaid` bigint DEFAULT NULL,
-  PRIMARY KEY (`sednicaskupstineid`),
-  KEY `stambenazajednicaid` (`stambenazajednicaid`),
-  CONSTRAINT `sednica_skupstine_ibfk_1` FOREIGN KEY (`stambenazajednicaid`) REFERENCES `stambena_zajednica` (`stambenazajednicaid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-/*Table structure for table `sednica_vlasnik` */
-
-DROP TABLE IF EXISTS `sednica_vlasnik`;
-
-CREATE TABLE `sednica_vlasnik` (
-  `sednicaskupstineid` bigint NOT NULL,
-  `vlasnikposebnogdelaid` bigint NOT NULL,
-  PRIMARY KEY (`sednicaskupstineid`,`vlasnikposebnogdelaid`),
-  KEY `vlasnikposebnogdelaid` (`vlasnikposebnogdelaid`),
-  CONSTRAINT `sednica_vlasnik_ibfk_2` FOREIGN KEY (`vlasnikposebnogdelaid`) REFERENCES `vlasnik_posebnog_dela` (`vlasnikid`),
-  CONSTRAINT `sednica_vlasnik_ibfk_3` FOREIGN KEY (`sednicaskupstineid`) REFERENCES `sednica_skupstine` (`sednicaskupstineid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Table structure for table `stambena_zajednica` */
 
@@ -88,21 +46,21 @@ CREATE TABLE `stambena_zajednica` (
   CONSTRAINT `stambena_zajednica_ibfk_1` FOREIGN KEY (`mesto`) REFERENCES `mesto` (`mestoid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-/*Table structure for table `stavka_racuna` */
+/*Table structure for table `sednica_skupstine` */
 
-DROP TABLE IF EXISTS `stavka_racuna`;
+DROP TABLE IF EXISTS `sednica_skupstine`;
 
-CREATE TABLE `stavka_racuna` (
-  `rb` int NOT NULL,
-  `cena` double DEFAULT NULL,
-  `racunid` bigint NOT NULL,
-  `uslugaid` bigint DEFAULT NULL,
-  PRIMARY KEY (`rb`,`racunid`),
-  KEY `racunid` (`racunid`),
-  KEY `uslugaid` (`uslugaid`),
-  CONSTRAINT `stavka_racuna_ibfk_1` FOREIGN KEY (`racunid`) REFERENCES `racun` (`racunid`),
-  CONSTRAINT `stavka_racuna_ibfk_2` FOREIGN KEY (`uslugaid`) REFERENCES `usluga` (`uslugaid`)
+CREATE TABLE `sednica_skupstine` (
+  `sednicaskupstineid` bigint NOT NULL AUTO_INCREMENT,
+  `datumodrzavanja` date DEFAULT NULL,
+  `brojprisutnih` int DEFAULT NULL,
+  `dnevnired` varchar(200) DEFAULT NULL,
+  `stambenazajednicaid` bigint DEFAULT NULL,
+  PRIMARY KEY (`sednicaskupstineid`),
+  KEY `stambenazajednicaid` (`stambenazajednicaid`),
+  CONSTRAINT `sednica_skupstine_ibfk_1` FOREIGN KEY (`stambenazajednicaid`) REFERENCES `stambena_zajednica` (`stambenazajednicaid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 /*Table structure for table `upravnik` */
 
@@ -129,6 +87,11 @@ CREATE TABLE `usluga` (
   PRIMARY KEY (`uslugaid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+/*Table structure for table `racun` */
+
+DROP TABLE IF EXISTS `racun`;
+
+
 /*Table structure for table `vlasnik_posebnog_dela` */
 
 DROP TABLE IF EXISTS `vlasnik_posebnog_dela`;
@@ -146,6 +109,50 @@ CREATE TABLE `vlasnik_posebnog_dela` (
   KEY `stambenazajednicaid` (`stambenazajednicaid`),
   CONSTRAINT `vlasnik_posebnog_dela_ibfk_1` FOREIGN KEY (`stambenazajednicaid`) REFERENCES `stambena_zajednica` (`stambenazajednicaid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+CREATE TABLE `racun` (
+  `racunid` bigint NOT NULL,
+  `ukupnavrednost` double DEFAULT NULL,
+  `datumizdavanja` date DEFAULT NULL,
+  `vlasnikid` bigint DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`racunid`),
+  KEY `vlasnikid` (`vlasnikid`),
+  CONSTRAINT `racun_ibfk_1` FOREIGN KEY (`vlasnikid`) REFERENCES `vlasnik_posebnog_dela` (`vlasnikid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Table structure for table `stavka_racuna` */
+
+DROP TABLE IF EXISTS `stavka_racuna`;
+
+CREATE TABLE `stavka_racuna` (
+  `rb` int NOT NULL,
+  `cena` double DEFAULT NULL,
+  `racunid` bigint NOT NULL,
+  `uslugaid` bigint DEFAULT NULL,
+  PRIMARY KEY (`rb`,`racunid`),
+  KEY `racunid` (`racunid`),
+  KEY `uslugaid` (`uslugaid`),
+  CONSTRAINT `stavka_racuna_ibfk_1` FOREIGN KEY (`racunid`) REFERENCES `racun` (`racunid`),
+  CONSTRAINT `stavka_racuna_ibfk_2` FOREIGN KEY (`uslugaid`) REFERENCES `usluga` (`uslugaid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+/*Table structure for table `sednica_vlasnik` */
+
+DROP TABLE IF EXISTS `sednica_vlasnik`;
+
+CREATE TABLE `sednica_vlasnik` (
+  `sednicaskupstineid` bigint NOT NULL,
+  `vlasnikposebnogdelaid` bigint NOT NULL,
+  PRIMARY KEY (`sednicaskupstineid`,`vlasnikposebnogdelaid`),
+  KEY `vlasnikposebnogdelaid` (`vlasnikposebnogdelaid`),
+  CONSTRAINT `sednica_vlasnik_ibfk_2` FOREIGN KEY (`vlasnikposebnogdelaid`) REFERENCES `vlasnik_posebnog_dela` (`vlasnikid`),
+  CONSTRAINT `sednica_vlasnik_ibfk_3` FOREIGN KEY (`sednicaskupstineid`) REFERENCES `sednica_skupstine` (`sednicaskupstineid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
