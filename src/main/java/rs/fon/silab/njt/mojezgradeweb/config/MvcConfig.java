@@ -18,9 +18,9 @@ import org.springframework.web.servlet.view.BeanNameViewResolver;
  */
 
 @Configuration
-@ComponentScan(basePackages = {
-    "rs.fon.silab.njt.mojezgradeweb.controller"
-})
+//@ComponentScan(basePackages = {
+//    "rs.fon.silab.njt.mojezgradeweb.controller"
+//})
 @EnableWebMvc
 public class MvcConfig {
    

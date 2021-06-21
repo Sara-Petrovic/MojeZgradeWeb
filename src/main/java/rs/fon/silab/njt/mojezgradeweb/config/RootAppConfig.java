@@ -25,8 +25,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author Sara
  */
 @Configuration
-@ComponentScan(basePackages = {})
-@EnableTransactionManagement
+//@ComponentScan(basePackages = {})
+//@EnableTransactionManagement
 public class RootAppConfig {
 
     @Autowired
@@ -43,7 +43,7 @@ public class RootAppConfig {
         dataSource.setUrl(environment.getProperty("url"));
         dataSource.setUsername(environment.getProperty("user"));
         dataSource.setPassword(environment.getProperty("password"));
-        dataSource.setDriverClassName(environment.getProperty("driver"));
+        //dataSource.setDriverClassName(environment.getProperty("driver"));
         return dataSource;
     }
 
@@ -61,11 +61,12 @@ public class RootAppConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
-        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
-        emf.setDataSource(dataSource);
-        emf.setPackagesToScan(new String[]{"rs.fon.silab.njt.mojezgradeweb.domain"});
-        JpaVendorAdapter hibernate = new HibernateJpaVendorAdapter();
-        emf.setJpaVendorAdapter(hibernate);
-        return emf;
+//        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+//        emf.setDataSource(dataSource);
+//        emf.setPackagesToScan(new String[]{"rs.fon.silab.njt.mojezgradeweb.domain"});
+//        JpaVendorAdapter hibernate = new HibernateJpaVendorAdapter();
+//        emf.setJpaVendorAdapter(hibernate);
+//        return emf;
+    return null;
     }
 }
