@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Login</h1>
-        <form action="/customer-web-mvc/application/login/post" method="POST">
+        <form action="/MojeZgradeWeb/application/login/post" method="POST">
             <input type="hidden" name="action" value="loginDo"/>
             <div>
                 ${errorMessage}
@@ -33,9 +33,9 @@
                         </td>
                     </tr>
                      <tr>
-                         <td><a href="/customer-web-mvc/application?action=registerDo">Register</a>
+                         <td><a href="/MojeZgradeWeb/application?action=registerDo">Register</a>
                              <br/>
-                         <a href="/customer-web-mvc/application/register">Register</a>
+                         <a href="/MojeZgradeWeb/application/register">Register</a>
                          </td>
                         <td>
                             <input type="submit" name="Login" value="Login"/>
