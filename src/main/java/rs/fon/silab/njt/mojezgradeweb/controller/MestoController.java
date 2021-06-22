@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rs.fon.silab.njt.mojezgradeweb.dto.impl.MestoDto;
 import rs.fon.silab.njt.mojezgradeweb.service.impl.MestoService;
+import rs.fon.silab.njt.mojezgradeweb.validator.MestoDtoValidator;
 
 /**
  *
@@ -87,10 +88,10 @@ public class MestoController {
 //        return modelAndView;
 //    }
 //    
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder){
-//        if (binder.getTarget() instanceof CityDto){
-//            binder.addValidators(new CityDtoValidator());
-//        }
-//    }
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        if (binder.getTarget() instanceof MestoDto){
+            binder.addValidators(new MestoDtoValidator());
+        }
+    }
 }

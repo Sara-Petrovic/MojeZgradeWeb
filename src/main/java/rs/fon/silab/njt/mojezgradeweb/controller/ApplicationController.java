@@ -18,7 +18,7 @@ public class ApplicationController {
 
     public String processRequest(HttpServletRequest request) {
         AbstractAction action= ActionFactory.getAction(request);
-         
+         System.err.println(action);
          return action.execute(request);
     }
 

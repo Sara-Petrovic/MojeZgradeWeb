@@ -6,6 +6,7 @@
 package rs.fon.silab.njt.mojezgradeweb.action;
 
 import javax.servlet.http.HttpServletRequest;
+import rs.fon.silab.njt.mojezgradeweb.action.mesto.MestoGetAllAction;
 import rs.fon.silab.njt.mojezgradeweb.action.registration.LoginAction;
 import rs.fon.silab.njt.mojezgradeweb.action.registration.LogoutAction;
 import rs.fon.silab.njt.mojezgradeweb.action.registration.RegistrationAddAction;
@@ -31,7 +32,9 @@ public class ActionFactory {
             case WebConstants.URL_LOGOUT_POST:
                 action = new LogoutAction();
                 break;
-            
+            case WebConstants.URL_ALL_CITY:
+                action =new MestoGetAllAction();
+                break;
             default:     
                 ;
         }

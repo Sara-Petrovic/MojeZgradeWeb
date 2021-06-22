@@ -48,7 +48,11 @@ public class FrontController extends HttpServlet {
 
         }
         String page = viewResolver.getPage(view);
-        request.getRequestDispatcher(page).forward(request, response);
+        System.out.println("--------------------------------------------------------------------------------------------");
+        System.out.println(request);
+         System.out.println("--------------------------------------------------------------------------------------------");
+        System.out.println(request.getRequestDispatcher(page));
+        request.getServletContext().getRequestDispatcher(page).forward(request, response);
 
     }
 
@@ -74,6 +78,7 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println(request.getPathInfo());
         processRequest(request, response);
     }
 

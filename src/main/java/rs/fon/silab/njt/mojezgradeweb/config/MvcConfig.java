@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  *
@@ -26,7 +27,18 @@ public class MvcConfig {
    
     @Bean
     public ViewResolver beanNameViewResolver() {
-        return new BeanNameViewResolver();
+        BeanNameViewResolver beanNameViewResolver = new BeanNameViewResolver();
+        beanNameViewResolver.setOrder(0);
+        return beanNameViewResolver;
     }
 
+    @Bean
+    public ViewResolver internalResourceViewResolver(){
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/WEB-INF/pages");
+        viewResolver.setSuffix(".jsp");
+        viewResolver.setOrder(1);
+        return viewResolver;
+    }
+    
 }

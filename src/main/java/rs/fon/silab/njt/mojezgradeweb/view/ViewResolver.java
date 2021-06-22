@@ -21,7 +21,7 @@ public class ViewResolver {
         views.put(WebConstants.VIEW_ADD_REGISTRATION, WebConstants.PAGE_ADD_REGISTRATION);
         views.put(WebConstants.VIEW_HOME, WebConstants.PAGE_HOME);
         views.put(WebConstants.VIEW_LOGIN, WebConstants.PAGE_LOGIN);
-        views.put(WebConstants.VIEW_ALL_CITY, WebConstants.PAGE_ALL_CITY);
+        views.put(WebConstants.VIEW_ALL_CITY, WebConstants.PAGE_HOME);
     }
     public String getPage(String view){//view je kljuc
         return views.get(view);

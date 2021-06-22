@@ -11,7 +11,9 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import rs.fon.silab.njt.mojezgradeweb.action.AbstractAction;
 import rs.fon.silab.njt.mojezgradeweb.constants.WebConstants;
+import rs.fon.silab.njt.mojezgradeweb.dao.impl.DbMestoDao;
 import rs.fon.silab.njt.mojezgradeweb.dto.impl.MestoDto;
+import rs.fon.silab.njt.mojezgradeweb.mapper.impl.MestoMapper;
 import rs.fon.silab.njt.mojezgradeweb.service.impl.MestoService;
 
 /**
@@ -22,7 +24,7 @@ public class MestoGetAllAction extends AbstractAction{
     private final MestoService cityService;
 
     public MestoGetAllAction () {
-        cityService = new MestoService();
+        cityService = new MestoService(new DbMestoDao(), new MestoMapper());
     }
     
     @Override

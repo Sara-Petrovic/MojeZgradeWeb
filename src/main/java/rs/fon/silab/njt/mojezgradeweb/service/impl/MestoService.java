@@ -7,6 +7,8 @@ package rs.fon.silab.njt.mojezgradeweb.service.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import rs.fon.silab.njt.mojezgradeweb.dao.Dao;
 import rs.fon.silab.njt.mojezgradeweb.dao.impl.DbMestoDao;
 import rs.fon.silab.njt.mojezgradeweb.domain.Mesto;
@@ -23,27 +25,25 @@ public class MestoService implements Service<MestoDto>{
    private final Dao<Mesto> cityDao;
     private final MestoMapper cityMapper;
 
-    public MestoService() {
-        this.cityDao = new DbMestoDao();
-        this.cityMapper = new MestoMapper();
+   @Autowired
+    public MestoService(@Qualifier (value = "cityDaoSpringJPA") Dao<Mesto> cityDao,MestoMapper cityMapper) {
+        this.cityDao = cityDao;
+        this.cityMapper = cityMapper;
+    }
+    
+    @Override
+    public void save(MestoDto cityDto) throws Exception{
+        System.out.println("Service: save");
+        cityDao.save(cityMapper.toEntity(cityDto));
+//        return cityDto;
     }
 
-
-   
-    
-//     @Override
-//    public List<CityDto> getAll() {
-//        List<City> cities = cityDao.getAll();
-//        return cities.stream().map(city->{
-//            return cityMapper.toDto(city);
-//        }).collect(Collectors.toList());
-//    }
-
     @Override
-    public List<MestoDto> getAll() throws Exception {
+    public List<MestoDto> getAll() throws Exception{
         List<Mesto> cities = cityDao.getAll();
+        
         return cities.stream().map(city->{
-            return cityMapper.toDto(city);
+            return  cityMapper.toDto(city);
         }).collect(Collectors.toList());
     }
 
@@ -52,10 +52,6 @@ public class MestoService implements Service<MestoDto>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void save(MestoDto param) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void edit(MestoDto param) throws Exception {

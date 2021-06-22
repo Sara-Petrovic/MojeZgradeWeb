@@ -1,22 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rs.fon.silab.njt.mojezgradeweb.domain;
 
 import java.util.Objects;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Sara
  */
 @javax.persistence.Entity
+@Table(name ="mesto")
+@XmlRootElement
+//@NamedQueries({
+//    @NamedQuery(name = "mesto.findAll", query = "SELECT * FROM mesto")
+//    , @NamedQuery(name = "mesto.findById", query = "SELECT c FROM mesto c WHERE c.mestoid = :mestoid")
+//    , @NamedQuery(name = "mesto.findByNaziv", query = "SELECT c FROM mesto c WHERE c.naziv = :naziv")})
+//   
 public class Mesto implements Entity {
+
     @Id
+    @Basic(optional = false)
+    @Column(name = "mestoid")
     private Long mestoId;
+    @Basic(optional = false)
+    @Column(name = "ptt")
     private String ptt;
+     @Basic(optional = false)
+    @Column(name = "naziv")
     private String naziv;
 
     public Mesto() {
@@ -140,5 +155,4 @@ public class Mesto implements Entity {
 //        rs.close();
 //        return lista;
 //    }
-
 }

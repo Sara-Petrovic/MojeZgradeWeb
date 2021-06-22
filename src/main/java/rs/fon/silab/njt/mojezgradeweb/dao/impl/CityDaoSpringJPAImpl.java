@@ -6,27 +6,32 @@
 package rs.fon.silab.njt.mojezgradeweb.dao.impl;
 
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 import rs.fon.silab.njt.mojezgradeweb.dao.Dao;
 import rs.fon.silab.njt.mojezgradeweb.domain.Mesto;
-import rs.fon.silab.njt.mojezgradeweb.storage.MestoDbStorage;
 
 /**
  *
- * @author Aleksandra Mišić
+ * @author korisnik
  */
-public class DbMestoDao implements Dao<Mesto> {
-
+@Repository(value = "cityDaoSpringJPA")
+public class CityDaoSpringJPAImpl implements Dao<Mesto>{
+    @PersistenceContext
+    private EntityManager entityManager;
+    
     @Override
     public void save(Mesto city) throws Exception {
-//        CityStorage.getInstance().getCities().add(city);
-
+        System.out.println("Save city using SpringJPA...");
+        entityManager.persist(city);
     }
 
     @Override
     public List<Mesto> getAll() throws Exception {
-//        return CityStorage.getInstance().getCities();
-        return MestoDbStorage.getInstance().getAllMesto(); 
-
+        return entityManager
+                .createQuery("SELECT c FROM mesto c ORDER BY c.naziv", Mesto.class)
+                .getResultList();
     }
 
     @Override
@@ -43,4 +48,5 @@ public class DbMestoDao implements Dao<Mesto> {
     public void delete(Mesto param) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }
