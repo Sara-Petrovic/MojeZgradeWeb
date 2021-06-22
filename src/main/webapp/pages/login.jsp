@@ -33,8 +33,7 @@
                         </td>
                     </tr>
                      <tr>
-                         <td><a href="/MojeZgradeWeb/application?action=registerDo">Register</a>
-                             <br/>
+                         <td>
                          <a href="/MojeZgradeWeb/application/register">Register</a>
                          </td>
                         <td>

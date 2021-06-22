@@ -53,7 +53,8 @@ public class FrontController extends HttpServlet {
     }
 
     private boolean authenticated(HttpServletRequest request) {
-        if (request.getPathInfo().equals(WebConstants.URL_LOGIN_POST)) {
+        System.out.println(request.getServletPath());
+        if (request.getPathInfo().equals(WebConstants.URL_LOGIN_POST) || request.getPathInfo().equals(WebConstants.URL_REGISTRATION)) {        
             return true;
         }
         //todo register
@@ -87,7 +88,7 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        System.out.println(request);
         processRequest(request, response);
     }
 
