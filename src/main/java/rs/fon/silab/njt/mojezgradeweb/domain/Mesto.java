@@ -5,17 +5,16 @@
  */
 package rs.fon.silab.njt.mojezgradeweb.domain;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+import javax.persistence.Id;
 
 /**
  *
  * @author Sara
  */
+@javax.persistence.Entity
 public class Mesto implements Entity {
-
+    @Id
     private Long mestoId;
     private String ptt;
     private String naziv;

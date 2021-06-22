@@ -23,6 +23,11 @@ public interface WebConstants {
 
     public static final String VIEW_HOME = "home";
     public static final String PAGE_HOME = "/WEB-INF/pages/home.jsp";
+    
+      
+    public static final String URL_ALL_CITY = "/city";
+    public static final String VIEW_ALL_CITY = "city-list";
+    public static final String PAGE_ALL_CITY = "/WEB-INF/pages/home.jsp";
 
    
 }

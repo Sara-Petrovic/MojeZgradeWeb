@@ -41,9 +41,11 @@ CREATE TABLE `stambena_zajednica` (
   `tekuciracun` varchar(50) DEFAULT NULL,
   `pib` varchar(50) DEFAULT NULL,
   `maticniBroj` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`stambenazajednicaid`),
+  `upravnikid` bigint(20) unsigned DEFAULT NULL,
+   PRIMARY KEY (`stambenazajednicaid`),
   KEY `mesto` (`mesto`),
   CONSTRAINT `stambena_zajednica_ibfk_1` FOREIGN KEY (`mesto`) REFERENCES `mesto` (`mestoid`)
+  CONSTRAINT `stambena_zajednica_ibfk_2` FOREIGN KEY (`upravnikid`) REFERENCES `upravnik` (`upravnikId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Table structure for table `sednica_skupstine` */
