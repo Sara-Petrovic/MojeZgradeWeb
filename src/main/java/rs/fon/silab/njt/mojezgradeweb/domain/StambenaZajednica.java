@@ -22,13 +22,14 @@ public class StambenaZajednica implements Entity {
     private String banka;
     private String pib;
     private String maticniBroj;
+    private Upravnik upravnik;
 
     public StambenaZajednica() {
     }
 
     public StambenaZajednica(Long stambenaZajednicaId, String ulica, String broj,
             Mesto mesto, String tekuciRacun, String banka, 
-            String pib, String maticniBroj) {
+            String pib, String maticniBroj, Upravnik upravnik) {
         this.stambenaZajednicaId = stambenaZajednicaId;
         this.ulica = ulica;
         this.broj = broj;
@@ -37,6 +38,37 @@ public class StambenaZajednica implements Entity {
         this.banka = banka;
         this.pib = pib;
         this.maticniBroj = maticniBroj;
+        this.upravnik = upravnik;
+    }
+    
+    
+    @Override
+    public String toString() {
+        return ulica + " " + broj + ", " + mesto;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final StambenaZajednica other = (StambenaZajednica) obj;
+        if (!Objects.equals(this.stambenaZajednicaId, other.stambenaZajednicaId)) {
+            return false;
+        }
+        return true;
     }
 
     public String getBanka() {
@@ -102,36 +134,17 @@ public class StambenaZajednica implements Entity {
     public void setMesto(Mesto mesto) {
         this.mesto = mesto;
     }
-
-    @Override
-    public String toString() {
-        return ulica + " " + broj + ", " + mesto;
+    
+    
+    public Upravnik getUpravnik() {
+        return upravnik;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
+    public void setUpravnik(Upravnik upravnik) {
+        this.upravnik = upravnik;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final StambenaZajednica other = (StambenaZajednica) obj;
-        if (!Objects.equals(this.stambenaZajednicaId, other.stambenaZajednicaId)) {
-            return false;
-        }
-        return true;
-    }
-
+    
 //    @Override
 //    public String getTableName() {
 //        return "stambena_zajednica";
